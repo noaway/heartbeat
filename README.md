@@ -25,4 +25,4 @@ The heartbeat timer
 	})
 </pre>
 
-<p>更多使用方法，请参考</p><a href="/heartbeat/heartbeat_test.go">heartbeat_test.go</a>
+<p>更多使用方法，请参考</p><a href="/heartbeat_test.go">heartbeat_test.go</a>
