@@ -4,6 +4,7 @@ The heartbeat timer
 <h1>Heartbeat简介</h1>
 
 <p>Heartbeat是一个基于Go的多任务的定时响应系统</p>
+<p>下载方式 go get github.com/noaway/heartbeat</p>
 
 <h1>Heartbeat的简单使用</h1>
 
