@@ -2,6 +2,7 @@ package heartbeat
 
 import (
 	"errors"
+	"runtime"
 	"sync"
 	"time"
 )
@@ -78,20 +79,28 @@ func run(self *Task, f func() error) {
 	for {
 		select {
 		case <-timer.C:
+			if self.Status == Pause {
+				runtime.Gosched()
+				continue
+			}
 			if err := f(); err != nil {
 				timer.Stop()
 				return
 			}
-		case status := <-getmaps(self.Name).Chan:
+		case status, ok := <-getmaps(self.Name).Chan:
+			if !ok {
+				if g := getmaps(self.Name); g != nil {
+					close(g.Chan)
+				}
+			}
 			switch status {
 			case Stop:
 				timer.Stop()
 				return
 			case Running:
-				continue
-			case Pause:
-				time.Sleep(time.Second * 600)
 				self.Status = Running
+			case Pause:
+				self.Status = Pause
 			}
 		}
 	}
@@ -119,6 +128,7 @@ func ClearTast(name string) error {
 	gm := getmaps(name)
 	if gm != nil {
 		gm.Chan <- Stop
+		close(gm.Chan)
 		delmaps(name)
 		return nil
 	}
@@ -129,7 +139,15 @@ func PauseTast(name string) error {
 	gm := getmaps(name)
 	if gm != nil {
 		gm.Chan <- Pause
-		gm.Status = Pause
+		return nil
+	}
+	return errors.New("The name of the task is invalid")
+}
+
+func Restarting(name string) error {
+	gm := getmaps(name)
+	if gm != nil {
+		gm.Chan <- Running
 		return nil
 	}
 	return errors.New("The name of the task is invalid")
