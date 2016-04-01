@@ -1,21 +1,19 @@
 # heartbeat
 The heartbeat timer
 
-[中文文档](README_ZH.md)
+<h1>Heartbeat简介</h1>
 
-<h1>Heartbeat introduction</h1>
+<p>Heartbeat是一个基于Go的多任务的定时响应回调</p>
 
-<p>Heartbeat is a response to the timing of multi-tasking callback based on Go</p>
-
-## Installation
+## 安装
 	
 	go get -u github.com/noaway/heartbeat
 
+<h1>Heartbeat的简单使用</h1>
 
-<h1>Heartbeat simple to use</h1>
+<h6>创建任务</h6>
 
-## Create task
-
+<pre>
 	name, spec := "12138", 5
 	ht, err := heartbeat.NewTast(name, spec)
 
@@ -29,5 +27,6 @@ The heartbeat timer
 		fmt.Println(name)
 		return nil
 	})
+</pre>
 
-<p>More usage, please reference</p><a href="/heartbeat_test.go">heartbeat_test.go</a>
+<p>更多使用方法，请参考</p><a href="/heartbeat_test.go">heartbeat_test.go</a>
