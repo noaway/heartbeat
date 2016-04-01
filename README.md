@@ -12,7 +12,7 @@ The heartbeat timer
 
 <pre>
 	name, spec := "12138", 5
-	ht, err := NewTast(name, spec)
+	ht, err := heartbeat.NewTast(name, spec)
 
 	if err != nil {
 		fmt.Println(err)
