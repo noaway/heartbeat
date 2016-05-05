@@ -1,4 +1,6 @@
 # heartbeat
+
+[![Join the chat at https://gitter.im/noaway/heartbeat](https://badges.gitter.im/noaway/heartbeat.svg)](https://gitter.im/noaway/heartbeat?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 The heartbeat timer
 
 [中文文档](README_ZH.md)
